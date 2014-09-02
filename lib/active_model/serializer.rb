@@ -2,6 +2,7 @@ require 'active_model/array_serializer'
 require 'active_model/serializable'
 require 'active_model/serializer/associations'
 require 'active_model/serializer/config'
+require 'rails'
 
 require 'thread'
 
@@ -10,6 +11,10 @@ module ActiveModel
     include Serializable
 
     @mutex = Mutex.new
+
+    def self.inherited(base)
+      base.include ::Rails.application.routes.url_helpers
+    end
 
     class << self
       def inherited(base)
