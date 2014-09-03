@@ -4,8 +4,13 @@ module ActiveModel
   class Serializer
     class RootAsOptionTest < Minitest::Test
       def setup
-        @old_root = ProfileSerializer._root
-        @profile = Profile.new({ name: 'Name 1', description: 'Description 1', comments: 'Comments 1' })
+        #@old_root = ProfileSerializer._root
+        #@profile = Profile.new({ name: 'Name 1', description: 'Description 1', comments: 'Comments 1' })
+        #@serializer = ProfileSerializer.new(@profile, root: :initialize)
+        #ProfileSerializer._root = true
+        @old_root = PostSerializer._root
+        #@profile = Post.new(name: 'Name 1', body: 'Body 1', comments: 'Comments 1')
+        @profile = posts(:one)
         @serializer = ProfileSerializer.new(@profile, root: :initialize)
         ProfileSerializer._root = true
       end

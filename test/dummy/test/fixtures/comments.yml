@@ -1,0 +1,9 @@
+one:
+  name: C1
+  body: B1
+  post_id: 2
+
+two:
+  name: C2
+  body: B2
+  post_id: 1

@@ -56,11 +56,11 @@ class ProfileSerializer < ActiveModel::Serializer
   attributes :name, :description
 end
 
-class PostSerializer < ActiveModel::Serializer
-  attributes :title, :body
-
-  has_many :comments
-end
+# class PostSerializer < ActiveModel::Serializer
+#   attributes :title, :body
+#
+#   has_many :comments
+# end
 
 class CommentSerializer < ActiveModel::Serializer
   attributes :content

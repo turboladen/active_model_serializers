@@ -1,24 +1,15 @@
-require 'bundler/setup'
-require 'minitest/autorun'
-require 'active_model_serializers'
-require 'fixtures/poro'
+# Configure Rails Environment
+ENV["RAILS_ENV"] = "test"
 
-# Ensure backward compatibility with Minitest 4
-Minitest::Test = MiniTest::Unit::TestCase unless defined?(Minitest::Test)
+require File.expand_path("../dummy/config/environment.rb",  __FILE__)
+require "rails/test_help"
 
-module TestHelper
-  Routes = ActionDispatch::Routing::RouteSet.new
-  Routes.draw do
-    get ':controller(/:action(/:id))'
-    get ':controller(/:action)'
-  end
+Rails.backtrace_cleaner.remove_silencers!
 
-  ActionController::Base.send :include, Routes.url_helpers
-  ActionController::Base.send :include, ActionController::Serialization
-end
+# Load support files
+Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
 
-ActionController::TestCase.class_eval do
-  def setup
-    @routes = TestHelper::Routes
-  end
+# Load fixtures from the engine
+if ActiveSupport::TestCase.method_defined?(:fixture_path=)
+  ActiveSupport::TestCase.fixture_path = File.expand_path("../fixtures", __FILE__)
 end
